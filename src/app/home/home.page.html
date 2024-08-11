@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title color="success"> Taller-1: Listado de tareas.</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <form [formGroup]="productForm" (ngSubmit)="doRegister()">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input formControlName="title" minlength="3" class="b-bottom" label="Title" placeholder="Arik"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <!-- @if (title.errors && (title.touched || title.dirty)){
+          <ion-row>
+            <ion-col>
+              <ion-text color="danger">El titulo es obligatorio. XD</ion-text>
+            </ion-col>
+          </ion-row>
+        }
+        @if(title.errors?.['minlength']){
+          <ion-row>
+            <ion-col>
+              <ion-text color="danger">El titulo debe tener por lo minimo 3 caracteres, equisde.</ion-text>
+            </ion-col>
+          </ion-row>
+        } -->
+
+        <!-- Si no hay titulo -->
+        <!-- Nota: Se puede usar tambien *ngIf. 
+        para las directivas estructurales asi también manejar la lógica condicional en las plantillas. -->
+
+        <ion-row>
+          <ion-col>
+            <ion-text color="danger" *ngIf="title?.errors && (title?.touched || title?.dirty)" color="danger">Task title is required lmao.</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <!-- Si el título tiene menos de 3 caracteres -->
+        <ion-row>
+          <ion-col>
+            <ion-text color="danger" *ngIf="title.errors?.['minlength']" color="danger">Task title must be at least 3 characters long, lol.</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-input formControlName="description" minlength="10" class="b-bottom" label="Description" placeholder="THE ONE PIECE IS REAAAAAL!!!!"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-text color="danger" *ngIf="description?.errors && (description?.touched || description?.dirty)" color="danger">A task description is required noob.</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-text color="danger" *ngIf="description.errors?.['minlength']" color="danger">The description of the task must be at least 10 characters long :P</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]="productForm.invalid" type="submit" color="success">Create</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card>
+
+  <!-- Nota: Al declarar el componente en las declaraciones del modulo, 
+   este puede acceder a los modulos faltantes. -->
+  <app-task-list [tasks]="tasks"></app-task-list>
+  
+  <!-- @if(tasks.length === 0){
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+         Tasks are empty. XD
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  }
+  @for (task of tasks; track $index) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+         {{ task.title }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{ task.description }}
+         </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  } -->
+
+  <!-- Nota: Investigar como aplicar el mismo for a un ngFor. -->
+
+</ion-content>

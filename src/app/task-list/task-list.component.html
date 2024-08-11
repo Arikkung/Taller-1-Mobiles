@@ -1,0 +1,24 @@
+@if(tasks.length === 0){
+<ion-card>
+  <ion-card-header>
+    <ion-card-title> Tasks are empty. XD </ion-card-title>
+  </ion-card-header>
+</ion-card>
+} @for (task of tasks; track $index) {
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      {{ task.title }}
+    </ion-card-title>
+    <ion-item>    
+      <!-- [(ngModel)] se usa para vincular el valor del checkbox al modelo de datos del componente a través del
+      two-way data binding (Enlace bidireccional) la capacidad de un componente para actualizar su estado y 
+      su vista de manera automática tanto cuando cambia el estado como cuando se produce un evento en la vista. -->
+      <ion-checkbox slot="end" [(ngModel)]="task.done"></ion-checkbox>
+    </ion-item>
+    <ion-card-subtitle>
+      {{ task.description }}
+    </ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
+}
